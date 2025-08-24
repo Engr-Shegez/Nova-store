@@ -35,12 +35,13 @@ function HeroBanner({ heroBanner }: HeroBannerProps) {
         <p className="beats-solo">{heroBanner.SmallText}</p>
         <h3>{heroBanner.MidText}</h3>
         <h1>{heroBanner.LargeText}</h1>
-        <img
-          src={urlFor(heroBanner.image).url()}
-          alt="banner"
-          className="hero-banner-image"
-        />
-
+        <picture>
+          <img
+            src={urlFor(heroBanner.image!).url()}
+            alt="banner"
+            className="hero-banner-image"
+          />
+        </picture>
         <div>
           <Link href={`/product/${heroBanner.product}`}>
             <button type="button">{heroBanner.buttonText}</button>

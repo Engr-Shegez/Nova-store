@@ -1,26 +1,44 @@
-// app/success/page.tsx
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-export default function SuccessPage() {
+function SuccessPage() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
-  const [status, setStatus] = useState("Loading...");
+  const [status, setStatus] = useState<string | null>(null);
 
   useEffect(() => {
     if (sessionId) {
       fetch(`/api/checkout-session?session_id=${sessionId}`)
         .then((res) => res.json())
-        .then((data) => setStatus(`Payment status: ${data.payment_status}`));
+        .then((data) => {
+          if (data?.payment_status) {
+            setStatus(`Payment status: ${data.payment_status}`);
+          } else {
+            setStatus("⚠️ Could not fetch payment status.");
+          }
+        })
+        .catch(() => setStatus("❌ Error loading payment status."));
+    } else {
+      setStatus("⚠️ No session ID found.");
     }
   }, [sessionId]);
 
   return (
-    <div>
+    <div style={{ textAlign: "center", marginTop: "3rem" }}>
       <h1>✅ Payment Successful!</h1>
-      <p>{status}</p>
+      <p>{status ?? "Loading..."}</p>
     </div>
+  );
+}
+
+export default function Success() {
+  return (
+    <Suspense
+      fallback={<p style={{ textAlign: "center" }}>Loading checkout...</p>}
+    >
+      <SuccessPage />
+    </Suspense>
   );
 }

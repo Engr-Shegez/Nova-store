@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 interface FooterBannerProps {
   footerBanner: {
@@ -14,12 +15,14 @@ interface FooterBannerProps {
     LargeText?: string;
     LargeText2?: string;
     discountAmount?: number;
-    image?: string;
+    image?: SanityImageSource;
   } | null;
 }
 
-function FooterBanner({
-  footerBanner: {
+function FooterBanner({ footerBanner }: FooterBannerProps) {
+  if (!footerBanner) return null; // ✅ handle null early
+
+  const {
     product,
     discountAmount,
     LargeText,
@@ -30,8 +33,7 @@ function FooterBanner({
     buttonText,
     image,
     description,
-  },
-}: FooterBannerProps) {
+  } = footerBanner;
   return (
     <div className="footer-banner-container">
       <div className="banner-desc">
@@ -51,7 +53,7 @@ function FooterBanner({
         </div>
         <picture>
           <img
-            src={urlFor(image).url()}
+            src={urlFor(image!).url()}
             className="footer-banner-image"
             alt="footer-banner"
           />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Products, FooterBanner, HeroBanner, Footer } from "../components";
+import { Products, FooterBanner, HeroBanner } from "../components";
 import { client } from "../sanity/lib/client";
 import { BANNER_QUERY, PRODUCT_QUERY } from "../sanity/queries/query";
 

@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 
 import { urlFor } from "@/sanity/lib/image";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 interface Product {
   _id: string;

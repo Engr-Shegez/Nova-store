@@ -76,11 +76,3 @@ export async function POST(req: Request) {
     );
   }
 }
-
-// catch (err: any) {
-//   console.error("Stripe Error:", err);
-//   return NextResponse.json(
-//     { error: err.message || "Unexpected error" },
-//     { status: err.statusCode || 500 }
-//   );
-// }

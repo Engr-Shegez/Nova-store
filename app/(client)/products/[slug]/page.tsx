@@ -1,5 +1,5 @@
 import { getProductSlug, getProduct } from "@/sanity/queries";
-// import { client, urlFor } from "@/sanity/lib/image";
+
 import React from "react";
 import { Products } from "@/components";
 import ProductDetails from "./ProductDetails";
